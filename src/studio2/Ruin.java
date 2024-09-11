@@ -46,8 +46,16 @@ public class Ruin {
 			 System.out.println("Total ruins: " + ruinCount + " out of " + totalSimulations + " simulations.");
 		     System.out.println("Total successes: " + winCount + " out of " + totalSimulations + " simulations.");
 		     double ruinPercentage = (double) ruinCount / totalSimulations * 100;
-		     System.out.println("Estimated probability of ruin: " + ruinPercentage + "%");
-
+		     System.out.print("Ruin rate from the simulations: " + ruinPercentage + "%");
+		     double expectedRuinRate = 0;
+		     double a = 0;
+		     if(winChance == 0.5) {
+		    	 expectedRuinRate = 1 - (startAmount/winLimit);
+		     } else {
+		    	 a = (1-winChance)/winChance;
+		    	 expectedRuinRate = (Math.pow(a, startAmount) - Math.pow(a, winLimit))/(1-Math.pow(a, winLimit));
+		     }
+		     System.out.println("Expected Ruin Rate: " + expectedRuinRate + "%");
 		     in.close();
 	}
 }
